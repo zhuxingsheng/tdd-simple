@@ -41,7 +41,6 @@ public class ArgsTest {
      * <p>
      * -p / -p 9090 8080
      */
-
     @Test
     public void should_set_boolean_option_to_true_if_flag_present() {
         BooleanOption options = Args.parse(BooleanOption.class, "-l");
@@ -52,6 +51,19 @@ public class ArgsTest {
     public void should_set_boolean_option_to_false_if_flag_not_present() {
         BooleanOption options = Args.parse(BooleanOption.class);
         Assertions.assertFalse(options.logging());
+    }
+
+    /**
+     * 实现第二个TODO [-p 8080]
+     */
+    @Test
+    public void should_set_int_as_option_value() {
+        IntOption options = Args.parse(IntOption.class, "-p", "8080");
+        Assertions.assertEquals(8080, options.port());
+    }
+
+    static record IntOption(@Option("p") int port) {
+
     }
 
 

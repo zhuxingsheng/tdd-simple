@@ -21,7 +21,17 @@ public class Args {
             Parameter parameter = constructor.getParameters()[0];
             Option option = parameter.getAnnotation(Option.class);
             List<String> args = Arrays.asList(params);
-            return (T) constructor.newInstance(args.contains("-" + option.value()));
+            Object value = null;
+            if (parameter.getType() == boolean.class) {
+                value = args.contains("-" + option.value());
+            }
+
+            if (parameter.getType() == int.class) {
+                int index = args.indexOf("-" + option.value());
+                value = Integer.valueOf(args.get(index + 1));
+            }
+
+            return (T) constructor.newInstance(value);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
