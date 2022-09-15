@@ -85,14 +85,17 @@ public class ArgsTest {
     }
 
     @Test
-    @Disabled
-    public void should_example_1() {
+    public void should_multi_option_value() {
 
-        Options options = Args.parse(Options.class, "-l", "-p", "8080", "-d", "/usr/logs");
+        MultiOptions options = Args.parse(MultiOptions.class, "-l", "-p", "8080", "-d", "/usr/logs");
 
         Assertions.assertEquals(true, options.logging());
         Assertions.assertEquals(8080, options.port());
         Assertions.assertEquals("/usr/logs", options.directory());
+
+    }
+
+    static record MultiOptions(@Option("l") boolean logging, @Option("p") int port, @Option("d") String directory) {
 
     }
 
