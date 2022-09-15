@@ -31,6 +31,11 @@ public class Args {
                 value = Integer.valueOf(args.get(index + 1));
             }
 
+            if (parameter.getType() == String.class) {
+                int index = args.indexOf("-" + option.value());
+                value = args.get(index + 1);
+            }
+
             return (T) constructor.newInstance(value);
         } catch (InstantiationException e) {
             e.printStackTrace();

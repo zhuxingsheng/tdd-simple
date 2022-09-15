@@ -66,6 +66,19 @@ public class ArgsTest {
 
     }
 
+    /**
+     * 实现第三个TODO [-d /usr/logs]
+     */
+    @Test
+    public void should_set_string_as_option_value() {
+        StringOption options = Args.parse(StringOption.class, "-d", "/usr/logs");
+        Assertions.assertEquals("/usr/logs", options.directory());
+    }
+
+    static record StringOption(@Option("d") String directory) {
+
+    }
+
 
     static record BooleanOption(@Option("l") boolean logging) {
 
