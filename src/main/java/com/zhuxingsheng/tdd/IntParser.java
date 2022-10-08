@@ -7,8 +7,4 @@ package com.zhuxingsheng.tdd;
  */
 class IntParser extends StringParser {
 
-    public static OptionParser createIntParser() {
-        return new StringParser(Integer::valueOf);
-    }
-
 }
