@@ -1,20 +1,19 @@
 package com.zhuxingsheng.tdd;
 
-import java.util.List;
-
 /**
  * @author zhuxingsheng@gmail.com
  * @description: TODO
  * @date 2022/9/25 23:46
  */
-class IntParser implements OptionParser {
+class IntParser extends StringParser {
 
-    @Override
-    public Object parse(List<String> args, Option option) {
-        Object value;
-        int index = args.indexOf("-" + option.value());
-        value = Integer.valueOf(args.get(index + 1));
-        return value;
+    //使用factory 代替constructor,因为factory方法能inline
+    private IntParser() {
+        super(Integer::valueOf);
+    }
+
+    public static OptionParser createIntParser() {
+        return new StringParser(Integer::valueOf);
     }
 
 }
