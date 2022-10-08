@@ -8,14 +8,11 @@ import java.util.function.Function;
  * @description: TODO
  * @date 2022/9/25 23:46
  */
-class StringParser implements OptionParser {
+class SingleValueParser implements OptionParser {
 
-    Function<String, Object> parseValue = String::valueOf;
+    Function<String, Object> parseValue;
 
-    public StringParser() {
-    }
-
-    public StringParser(Function<String, Object> parseValue) {
+    public SingleValueParser(Function<String, Object> parseValue) {
         this.parseValue = parseValue;
     }
 
@@ -27,7 +24,6 @@ class StringParser implements OptionParser {
     }
 
     protected Object getValue(String value) {
-
         return parseValue.apply(value);
     }
 
